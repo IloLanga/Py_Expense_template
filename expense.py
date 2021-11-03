@@ -2,14 +2,6 @@ from PyInquirer import prompt, print_json
 import csv
 import json
 
-
-
-with open('expense_report.csv', newline='') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-    for row in spamreader:
-      print(', '.join(row))
-
-
 expense_questions = [
     {
         "type":"input",
