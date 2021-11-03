@@ -1,9 +1,10 @@
 from PyInquirer import prompt, print_json, Separator
 import csv
 import json
+import regex
 
 def get_user_list():
-    user_list = ['hey']
+    user_list = []
 
     with open('users.csv', newline='') as csvfile:
      spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -34,7 +35,13 @@ expense_questions = [
 
 
 def new_expense(*args):
-    infos = prompt(expense_questions)
+
+    amount = ""
+    while not (amount.isdigit()):
+      infos = prompt(expense_questions)
+      amount = infos["amount"]
+      if not (amount.isdigit()):
+        print("Amount must be an number, try again")
 
     with open('expense_report.csv', 'a', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',',
