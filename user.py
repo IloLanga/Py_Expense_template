@@ -20,5 +20,5 @@ def add_user():
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow([infos["name"]])
 
-    # print("User Added ! Welcome " + infos["name"])
+    print("User Added ! Welcome " + infos["name"])
     return True

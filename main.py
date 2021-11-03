@@ -1,6 +1,6 @@
 from PyInquirer import prompt
 from examples import custom_style_2
-from expense import expense_questions,new_expense
+from expense import expense_questions,new_expense, get_user_list
 from user import user_questions, add_user
 
 def ask_option():
