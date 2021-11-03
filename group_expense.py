@@ -2,6 +2,7 @@ from PyInquirer import prompt, print_json, Separator
 import csv
 import json
 
+# recupere une liste de spender du csv et la renvoie
 def get_user_list():
     user_list = []
     with open('users.csv', newline='') as csvfile:
@@ -36,6 +37,7 @@ def new_group_expense(*args):
     spenders = []
     amount = ""
 
+    # recommence si le choix des spenders est vide, ou si le montant n'est pas un chiffre
     while (len(spenders) == 0) or (not amount.isdigit()):
       expense_info = prompt(group_expense_questions)
       spenders = expense_info["spenders"]
@@ -51,7 +53,7 @@ def new_group_expense(*args):
     label = expense_info["label"]
 
 
-
+    # met la nouvelle information dans le csv
     with open('expense_report.csv', 'a', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)

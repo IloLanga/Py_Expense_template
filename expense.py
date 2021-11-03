@@ -3,6 +3,7 @@ import csv
 import json
 import regex
 
+# recupere la liste des spenders
 def get_user_list():
     user_list = []
 
@@ -37,12 +38,14 @@ expense_questions = [
 def new_expense(*args):
 
     amount = ""
+    # verifie que le montant est un chiffre, recommence sinon
     while not (amount.isdigit()):
       infos = prompt(expense_questions)
       amount = infos["amount"]
       if not (amount.isdigit()):
         print("Amount must be an number, try again")
 
+    # met la nouvelle transaction dans le csv
     with open('expense_report.csv', 'a', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
