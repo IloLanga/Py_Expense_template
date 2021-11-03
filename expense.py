@@ -1,4 +1,14 @@
-from PyInquirer import prompt
+from PyInquirer import prompt, print_json
+import csv
+import json
+
+
+
+with open('expense_report.csv', newline='') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+    for row in spamreader:
+      print(', '.join(row))
+
 
 expense_questions = [
     {
@@ -24,6 +34,14 @@ expense_questions = [
 def new_expense(*args):
     infos = prompt(expense_questions)
     # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
+    # print(infos)
+    # print(infos["amount"])
+
+    with open('expense_report.csv', 'a', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow([infos["amount"], infos["label"], infos["spender"]])
+
     print("Expense Added !")
     return True
 
